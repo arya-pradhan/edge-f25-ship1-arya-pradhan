@@ -122,6 +122,12 @@ searchInput.addEventListener("input", () => {
   // TODO: Clear any existing timer
   // TODO: Set a new timer to filter and render after 300ms delay
   // Hint: Use setTimeout and call searchEntries() then render()
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    searchEntries(entries, searchInput.value);
+    render(searchEntries(entries, searchInput.value));
+  }, 300);
+  searchEntries(entries, searchInput.value);
 });
 
 // TODO (hard mode): Add keyboard shortcuts.
@@ -131,6 +137,7 @@ document.addEventListener("keydown", (event) => {
 
   // TODO: Handle Enter key in add input - add entry if non-empty
   if (key === "Enter" && document.activeElement === entryInput) {
+    addEntry(entries, entryInput.value);
     // Your code here
   }
 

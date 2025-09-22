@@ -35,7 +35,10 @@
 // eslint-disable-next-line no-unused-vars
 export function addEntry(entries, text) {
   // TODO: remove the following line and write your implementation.
-  throw new Error("addEntry() not implemented yet");
+  const v = String(text || "").trim();
+  if (!v) throw new Error("empty entry");
+  const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
+  return [{ t: timestamp, v }, ...entries];
 }
 
 /**
@@ -54,7 +57,7 @@ export function addEntry(entries, text) {
 // eslint-disable-next-line no-unused-vars
 export function deleteEntry(entries, index) {
   // TODO: remove the following line and write your implementation.
-  throw new Error("deleteEntry() not implemented yet");
+  return entries.filter((_, i) => i !== index - 1);
 }
 
 /**
@@ -74,5 +77,8 @@ export function deleteEntry(entries, index) {
 // eslint-disable-next-line no-unused-vars
 export function searchEntries(entries, query) {
   // TODO: remove the following line and write your implementation.
-  throw new Error("searchEntries() not implemented yet");
+  if (!query || query.trim() === '') {
+    return entries;
+  }
+  return entries.filter(entry => entry.v.toLowerCase().includes(query.toLowerCase()));
 }
